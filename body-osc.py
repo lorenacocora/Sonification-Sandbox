@@ -19,12 +19,14 @@ pose_info=[]
 parser = argparse.ArgumentParser()
 parser.add_argument("--ip", default="127.0.0.1", help="The ip of the OSC server")
 parser.add_argument("--port", type=int, default=6448, help="The port the OSC server is listening on")
+parser.add_argument("--port2", type=int, default=6449, help="The port the second OSC server is listening on")
 args = parser.parse_args()
 
 client = udp_client.SimpleUDPClient(args.ip, args.port)
+client2 = udp_client.SimpleUDPClient(args.ip, args.port2)
 
 # For webcam input:a
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 with mp_pose.Pose(
     min_detection_confidence=0.5,
     min_tracking_confidence=0.5) as pose:
